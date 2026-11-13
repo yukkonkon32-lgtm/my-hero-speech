@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>My Hero Speech</title>
+<link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=M+PLUS+Rounded+1c:wght@700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fff6d6;--card:#fff;--ink:#4a1148;--pink:#ffb9d9;--red:#f72b06;--blue:#0086b3;--sel:#ffdd1f;--brown:#5e2012;--line:#4a1148}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#2a1a14;--card:#3b2a22;--ink:#fff3d6;--line:#ffd7e8;--sel:#ffdd1f}}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"M PLUS Rounded 1c","Hiragino Maru Gothic ProN",system-ui,sans-serif;font-weight:800;padding:env(safe-area-inset-top,0px) 14px calc(env(safe-area-inset-bottom,0px) + 270px)}
+main{max-width:760px;margin:0 auto}
+h1{font-family:"Dela Gothic One",system-ui,sans-serif;font-weight:400;font-size:clamp(28px,6vw,44px);margin:18px 0 4px;color:var(--red);text-shadow:3px 3px 0 var(--pink)}
+.lead{margin:0 0 14px}
+section{background:var(--card);border:3px solid var(--line);border-radius:22px;padding:14px;margin:14px 0}
+h2{font-family:"Dela Gothic One",system-ui,sans-serif;font-weight:400;font-size:22px;margin:0 0 10px;display:inline-block;background:var(--pink);color:var(--ink);padding:4px 12px;border-radius:10px;transform:rotate(-1.5deg)}
+h2 small{font-family:"M PLUS Rounded 1c",sans-serif;font-size:13px;margin-left:8px}
+.chips{display:flex;flex-wrap:wrap;gap:10px}
+button.chip{font:inherit;font-size:18px;color:var(--ink);background:var(--card);border:3px solid var(--line);border-radius:16px;padding:10px 14px;min-height:56px;cursor:pointer;display:flex;align-items:center;gap:8px;box-shadow:0 4px 0 var(--line)}
+button.chip:active{transform:translateY(3px);box-shadow:0 1px 0 var(--line)}
+button.chip[aria-pressed="true"]{background:var(--sel);color:#4a1148}
+button.chip:focus-visible,input:focus-visible,.btn:focus-visible{outline:4px solid var(--blue);outline-offset:2px}
+.chip .e{font-size:24px}
+button.chip.card{flex-direction:column;justify-content:center;gap:4px;width:116px;min-height:108px;padding:8px 6px;font-size:15px;line-height:1.2;text-align:center}
+button.chip.card .e{font-size:44px;line-height:1}
+button.chip.im{padding:6px;width:132px;height:120px;justify-content:center}
+button.chip.im[aria-pressed="false"]{background:#fff}
+button.chip.im[aria-pressed="true"]{box-shadow:0 0 0 5px var(--sel),0 4px 0 var(--line)}
+button.chip.im img{max-width:100%;max-height:100%;object-fit:contain;pointer-events:none}
+.pro button.chip{font-family:"Dela Gothic One",sans-serif;font-weight:400;font-size:26px;min-width:120px;justify-content:center}
+.pro button.chip[data-v="she"]{color:var(--red)}
+.pro button.chip[data-v="he"]{color:var(--blue)}
+.pro button.chip[aria-pressed="true"]{color:#4a1148}
+input{font:inherit;font-size:18px;border:3px solid var(--line);border-radius:14px;padding:10px 12px;min-height:56px;width:100%;max-width:280px;background:var(--card);color:var(--ink)}
+.own{margin-top:10px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+#speech{position:fixed;left:0;right:0;bottom:0;background:var(--card);border-top:4px solid var(--line);padding:10px 14px calc(env(safe-area-inset-bottom,0px) + 10px);z-index:5}
+#speech .in{max-width:760px;margin:0 auto}
+#lines{font-size:clamp(15px,3.8vw,19px);line-height:1.35;margin:0 0 8px}
+#lines .b{display:inline-block;min-width:3.2em;border-bottom:3px dashed var(--pink);color:transparent}
+#lines .f{color:var(--red)}
+#lines .f.m{color:var(--blue)}
+.row{display:flex;gap:10px}
+.btn{font:inherit;font-size:18px;border:3px solid var(--line);border-radius:14px;padding:10px 16px;min-height:52px;cursor:pointer;color:var(--ink);background:var(--sel);box-shadow:0 4px 0 var(--line)}
+.btn.g{background:var(--card)}
+.btn:active{transform:translateY(3px);box-shadow:none}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<main>
+<h1>My Hero Speech</h1>
+<p class="lead">タップして えらぼう！ 下の スピーチが かんせいするよ。</p>
+
+<section><h2>This is<small>あこがれの人（家族・友だち・有名人）</small></h2>
+<div class="chips" id="who"></div><div class="own" data-k="who"><input placeholder="じぶんで入力 例: Taro Yamada" aria-label="own who" autocomplete="off"><button class="btn g">OK</button></div>
+
+</section>
+
+<section class="pro"><h2>She / He<small>どっち？</small></h2>
+<div class="chips"><button class="chip" data-v="she" aria-pressed="false">She</button><button class="chip" data-v="he" aria-pressed="false">He</button></div>
+</section>
+
+<section><h2>is …<small>しょくぎょう</small></h2><div class="chips" id="job"></div><div class="own" data-k="job"><input placeholder="じぶんで入力 例: a vet" aria-label="own job" autocomplete="off"><button class="btn g">OK</button></div></section>
+<section><h2>can …<small>できること</small></h2><div class="chips" id="can"></div><div class="own" data-k="can"><input placeholder="じぶんで入力 例: sing well" aria-label="own can" autocomplete="off"><button class="btn g">OK</button></div></section>
+<section><h2>is good at …<small>とくいなこと</small></h2><div class="chips" id="good"></div><div class="own" data-k="good"><input placeholder="じぶんで入力 例: tennis" aria-label="own good" autocomplete="off"><button class="btn g">OK</button></div></section>
+</main>
+
+<div id="speech"><div class="in">
+<p id="lines" aria-live="polite"></p>
+<div class="row"><button class="btn" id="say">🔊 きく</button><button class="btn g" id="reset">やりなおし</button></div>
+</div></div>
+
+<script>
+var D={who:[["Shohei Ohtani", "⚾"], ["Aimyon", "🎸"], ["Hayao Miyazaki", "🎨"], ["Kylian Mbappé", "⚽"], ["Motoki Ohmori", "🍏"], ["Yunah", "🎤"], ["Shinnosuke Nohara", "🖍️"], ["Sota Fujii", "♟️"], ["Yuki Kurihara", "🎮"], ["Satoru Gojo", "🕶️"], ["Eren Yeager", "⚔️"], ["Izuku Midoriya", "💚"], ["Yoichi Isagi", "⚽"], ["my mother", "👩"], ["my father", "👨"], ["my grandmother", "👵"], ["my grandfather", "👴"], ["my sister", "👧"], ["my brother", "👦"], ["my friend", "🧑‍🤝‍🧑"]],
+job:[["a kindergartener", "🧒"], ["a student", "🎒"], ["a pro gamer", "🎮"], ["a teacher", "🧑‍🏫"], ["a baker", "🥖"], ["a police officer", "👮"], ["a doctor", "🩺"], ["a cook", "🍳"], ["a firefighter", "🧑‍🚒"], ["a florist", "💐"], ["a nurse", "🧑‍⚕️"], ["a shopkeeper", "🏪"], ["a reporter", "🎙️"], ["a vet", "🐶"], ["a carpenter", "🔨"], ["a baseball player", "⚾"], ["a cartoonist", "✏️"], ["a comedian", "🎭"], ["an engineer", "🔧"], ["a flight attendant", "✈️"], ["a hairdresser", "✂️"], ["a kindergarten teacher", "🧸"], ["a pharmacist", "💊"], ["a scientist", "🔬"], ["a singer", "🎤"], ["a soccer player", "⚽"], ["a zookeeper", "🦁"], ["an astronaut", "🚀"], ["a fisher", "🎣"], ["a bus driver", "🚌"], ["a designer", "🎨"], ["a pilot", "🛩️"], ["a programmer", "💻"], ["a farmer", "🌾"], ["an actor", "🎬"], ["an illustrator", "🖍️"]],
+can:[["sing well", "🎤"], ["dance well", "💃"], ["ski well", "⛷️"], ["run fast", "🏃"], ["swim fast", "🏊"], ["jump high", "🤸"], ["cook curry", "🍛"], ["play soccer", "⚽"], ["play the guitar", "🎸"], ["cook delicious food", "🍳"], ["drive a big bus", "🚌"], ["go to Canada", "🍁"], ["help people", "🤝"], ["make robots", "🤖"], ["save the forests", "🌳"], ["take care of sick animals", "🐾"], ["talk with people", "💬"], ["write famous songs", "🎵"]],
+good:[["pranks", "😜"], ["video games", "🎮"], ["shogi", "♟️"], ["battles", "🥊"], ["badminton", "🏸"], ["baseball", "⚾"], ["basketball", "🏀"], ["dodgeball", "🔴"], ["gymnastics", "🤸"], ["rugby", "🏉"], ["skateboarding", "🛹"], ["skiing", "⛷️"], ["soccer", "⚽"], ["softball", "🥎"], ["surfing", "🏄"], ["swimming", "🏊"], ["table tennis", "🏓"], ["tennis", "🎾"], ["volleyball", "🏐"], ["English", "🔤"], ["music", "🎵"], ["math", "➗"], ["Japanese", "🇯🇵"], ["science", "🔬"], ["social studies", "🌏"], ["arts and crafts", "✂️"], ["home economics", "🧵"], ["calligraphy", "🖌️"]]};
+var S={who:"",pro:"",job:"",can:"",good:""};
+function build(id,key){
+  var box=document.getElementById(id);
+  D[key].forEach(function(it){
+    var b=document.createElement("button");
+    b.className="chip card";b.setAttribute("aria-pressed","false");b.dataset.val=it[0];
+    b.innerHTML='<span class="e"></span><span class="t"></span>';
+    b.firstChild.textContent=it[1];b.lastChild.textContent=it[0];
+    b.onclick=function(){S[key]=(S[key]===it[0])?"":it[0];var i=document.querySelector('.own[data-k="'+key+'"] input');if(i)i.value="";sync();};
+    box.appendChild(b);
+  });
+}
+build("who","who");build("job","job");build("can","can");build("good","good");
+document.querySelectorAll(".pro .chip").forEach(function(b){b.onclick=function(){S.pro=(S.pro===b.dataset.v)?"":b.dataset.v;sync();};});
+document.querySelectorAll(".own").forEach(function(o){
+  var i=o.querySelector("input"),k=o.dataset.k;
+  function ok(){S[k]=i.value.trim();sync();}
+  o.querySelector("button").onclick=ok;
+  i.addEventListener("keydown",function(e){if(e.key==="Enter")ok();});
+});
+function esc(s){return s.replace(/[&<>]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;"}[c];});}
+function lines(){
+  var P=S.pro==="he"?"He":"She",cls=S.pro==="he"?"f m":"f";
+  function f(v){return v?'<span class="'+cls+'">'+esc(v)+'</span>':'<span class="b">__</span>';}
+  var pr=S.pro?P:"She/He";
+  return [
+    ["Hello!","Hello!"],
+    ["This is "+f(S.who)+".","This is "+(S.who||"")+"."],
+    [pr+" is "+f(S.job)+".",pr+" is "+(S.job||"")+"."],
+    [pr+" can "+f(S.can)+".",pr+" can "+(S.can||"")+"."],
+    [pr+" is good at "+f(S.good)+".",pr+" is good at "+(S.good||"")+"."],
+    ["Thank you!!!","Thank you!"]
+  ];
+}
+function sync(){
+  document.querySelectorAll(".chip[data-val]").forEach(function(b){
+    var k=b.parentNode.id;b.setAttribute("aria-pressed",String(S[k]===b.dataset.val));
+  });
+  document.querySelectorAll(".pro .chip").forEach(function(b){b.setAttribute("aria-pressed",String(S.pro===b.dataset.v));});
+  document.getElementById("lines").innerHTML=lines().map(function(l){return l[0];}).join("<br>");
+}
+document.getElementById("say").onclick=function(){
+  try{
+    var u=lines().map(function(l){return l[1].replace(/\s+\./g,".");}).join(" ");
+    speechSynthesis.cancel();var m=new SpeechSynthesisUtterance(u);m.lang="en-US";m.rate=0.85;speechSynthesis.speak(m);
+  }catch(e){}
+};
+document.getElementById("reset").onclick=function(){S={who:"",pro:"",job:"",can:"",good:""};document.querySelectorAll(".own input").forEach(function(i){i.value="";});sync();window.scrollTo(0,0);};
+sync();
+</script>
+</body>
+</html>
